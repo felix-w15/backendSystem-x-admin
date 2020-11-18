@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录-X-admin1.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+
+</head>
+<body>
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+            <!-- 右侧内容框架，更改从这里开始 -->
+            <form class="layui-form"  method="post" action="/stuBedEdit" onsubmit="return beforeSub();">
+                <div class="layui-form-item">
+                    <label for="L_stuid" class="layui-form-label" >
+                        学生id
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_stuid" name="stu_id"  th:value="${session.stu_id}"  lay-verify="required" required
+                           autocomplete="off"  class="layui-input" readonly>
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_dormid" class="layui-form-label">
+                        宿舍楼号
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_dormid" name="dorm_id" autocomplete="off" required
+                        class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_layerid" class="layui-form-label">
+                        楼层
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_layerid" name="layer_id" autocomplete="off" required
+                        class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_roomid" class="layui-form-label">
+                        房间号
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_roomid" name="room_id" autocomplete="off" required
+                        class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_bednum" class="layui-form-label">
+                        床位号
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_bednum" name="bed_num" autocomplete="off" required
+                        class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label for="L_bt" class="layui-form-label">
+                    </label>
+                    <button class="layui-btn" id="L_bt"  >
+                        保存
+                    </button>
+                </div>
+            </form>
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <script >
+        function isPos(num) {
+            if(num > 0)
+                return true;
+            else
+                return false;
+        }
+
+        function beforeSub(){
+            var id = document.getElementById("L_dormid").value;
+            var dormid = document.getElementById("L_dormid").value;
+            var layerid = document.getElementById("L_layerid").value;
+            var roomid = document.getElementById("L_roomid").value;
+            var bednum = document.getElementById("L_bednum").value;
+            if (isNaN(dormid) || !isPos(dormid)) {
+                alert("楼层id需为大于0数字");
+                return false;
+            }
+            if (isNaN(layerid) || !isPos(layerid)) {
+                alert("层数需为大于0数字");
+                return false;
+            }
+            if (isNaN(roomid) || !isPos(roomid)) {
+                alert("房间号需为大于0数字");
+                return false;
+            }
+            if (isNaN(bednum) || !isPos(bednum)) {
+                alert("床号需为大于0数字");
+                return false;
+            }
+            x_admin_close();
+            return true;
+        }
+
+        var stu_bed = decodeURIComponent(location.search.slice(1).split("=")[1])
+        stu_bed = JSON.parse(stu_bed);
+        // alert()
+        var username_label = document.getElementById("L_stuid");
+        username_label.value = stu_bed["stu_id"];
+
+
+        var dormid_lable = document.getElementById("L_dormid");
+
+        if(stu_bed["dorm_id"] != -1)
+            dormid_lable.value = stu_bed["dorm_id"];
+        var layerid_lable = document.getElementById("L_layerid");
+
+        if(stu_bed["layer_id"] != -1)
+            layerid_lable.value = stu_bed["layer_id"];
+        var roomid_lable = document.getElementById("L_roomid");
+
+        if(stu_bed["room_id"] != -1)
+            roomid_lable.value = stu_bed["room_id"];
+        var bednumid_lable = document.getElementById("L_bednum");
+
+        if(stu_bed["bed_num"] != -1)
+            bednumid_lable.value = stu_bed["bed_num"];
+
+
+    </script>
+</body>
+</html>

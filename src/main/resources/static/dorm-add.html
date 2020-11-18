@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录-X-admin1.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+
+</head>
+<body>
+<!-- 中部开始 -->
+<div class="wrapper">
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="content">
+            <!-- 右侧内容框架，更改从这里开始 -->
+            <form class="layui-form" method="post" action="/dormAdd" onsubmit="return beforeSub();" >
+                <!--                <div class="layui-form-item">-->
+                <!--                    <label for="L_email" class="layui-form-label">-->
+                <!--                        <span class="x-red">*</span>邮箱-->
+                <!--                    </label>-->
+                <!--                    <div class="layui-input-inline">-->
+                <!--                        <input type="text" id="L_email" name="email" required="" lay-verify="email"-->
+                <!--                        autocomplete="off" class="layui-input">-->
+                <!--                    </div>-->
+                <!--                    <div class="layui-form-mid layui-word-aux">-->
+                <!--                        <span class="x-red">*</span>将会成为您唯一的登入名-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div class="layui-form-item">
+                    <label for="L_dormid" class="layui-form-label">
+                        <span class="x-red">*</span>楼id
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_dormid" name="dorm_id" required="required" lay-verify="nikename"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_layer" class="layui-form-label">
+                        <span class="x-red">*</span>楼层数
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_layer" name="layer" required="required" lay-verify="pass"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_roomPerLayer" class="layui-form-label">
+                        <span class="x-red">*</span>房间/层
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_roomPerLayer" name="roomPerLayer" required="required" lay-verify="repass"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_bedPerRoom" class="layui-form-label">
+                        <span class="x-red">*</span>床位/房间
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_bedPerRoom" name="bedPerRoom" required="required" lay-verify="repass"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label for="L_bedPerRoom" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                        增加
+                    </button>
+                </div>
+            </form>
+            <!-- 右侧内容框架，更改从这里结束 -->
+        </div>
+    </div>
+    <!-- 右侧主体结束 -->
+</div>
+<!-- 中部结束 -->
+<script>
+    function isPos(num) {
+        if(num > 0)
+            return true;
+        else
+            return false;
+    }
+
+    function beforeSub() {
+        var id = document.getElementById("L_dormid").value;
+        var layer = document.getElementById("L_layer").value;
+        var roomPerLayer = document.getElementById("L_roomPerLayer").value;
+        var bedPerRoom = document.getElementById("L_bedPerRoom").value;
+        if (isNaN(id) || !isPos(id)) {
+            alert("楼层id需为大于0数字");
+            return false;
+        }
+        if (isNaN(layer) || !isPos(layer)) {
+            alert("层数需为大于0数字");
+            return false;
+        }
+        if (isNaN(roomPerLayer) || !isPos(roomPerLayer)) {
+            alert("房间/层需为大于0数字");
+            return false;
+        }
+        if (isNaN(bedPerRoom) || !isPos(bedPerRoom)) {
+            alert("床/房间需为大于0数字");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
